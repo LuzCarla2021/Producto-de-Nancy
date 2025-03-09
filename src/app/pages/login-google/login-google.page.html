@@ -1,13 +1,28 @@
+<!-- pagina de inicio de sesion con google -->
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>login-google</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">login-google</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <div *ngIf="!user">
+    <ion-button expand="full" (click)="login()">
+      <ion-icon slot="start" name="logo-google"></ion-icon>
+      Iniciar sesión con Google
+    </ion-button>
+  </div>
+
+  <div *ngIf="user">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Bienvenido, {{ user.displayName }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <img [src]="user.photoURL" *ngIf="user.photoURL">
+        <p>Email: {{ user.email }}</p>
+        <ion-button expand="full" (click)="logout()">Cerrar sesión</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
